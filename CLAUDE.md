@@ -12,6 +12,7 @@ Dieses Repository gehört zu den WordPress-Plugins von b83 – Strategisches Onl
 - Logik in Klassen unter `src/`, Backend in `src/Admin/`, Ausgabe in `src/Frontend/`
 - CSS/JS als eigene Dateien unter `assets/`, kein Inline-Code außer kleiner Konfiguration (wp_localize_script)
 - `uninstall.php` vorhanden; Daten nur löschen, wenn der Nutzer das aktiviert hat
+- `SECURITY.md` (Meldeweg für Lücken) und `.github/dependabot.yml` (Actions aktuell halten) in jedem Repository
 - `README.md` und `CHANGELOG.md` pflegen, Version in Header, Konstante und Changelog gleich halten
 
 ## Sicherheit (Pflicht)
