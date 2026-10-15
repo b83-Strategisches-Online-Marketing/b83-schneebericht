@@ -1,0 +1,15 @@
+# Betriebssystem / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Abhängigkeiten / Builds
+/vendor/
+/node_modules/
+/dist/
+*.zip
+
+# Laufzeitdaten des alten Plugins nie einchecken
+tvb_schneebericht_data.json

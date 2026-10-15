@@ -1,0 +1,79 @@
+<?php
+/**
+ * Einstiegspunkt: verdrahtet alle Komponenten.
+ *
+ * @package B83\Schneebericht
+ */
+
+declare(strict_types=1);
+
+namespace B83\Schneebericht;
+
+use B83\Schneebericht\Admin\AdminPage;
+use B83\Schneebericht\Frontend\Embed;
+use B83\Schneebericht\Frontend\Renderer;
+use B83\Schneebericht\Frontend\Shortcodes;
+
+defined( 'ABSPATH' ) || exit;
+
+final class Plugin {
+
+	private static ?Plugin $instance = null;
+
+	private Repository $repository;
+	private Renderer $renderer;
+	private bool $booted = false;
+
+	public static function instance(): Plugin {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	private function __construct() {
+		$this->repository = new Repository();
+		$this->renderer   = new Renderer( $this->repository );
+	}
+
+	public function boot(): void {
+		if ( $this->booted ) {
+			return;
+		}
+		$this->booted = true;
+
+		add_action( 'init', array( $this, 'load_textdomain' ) );
+		add_action( 'init', array( $this, 'register_assets' ) );
+		add_action( 'admin_init', array( Migration::class, 'maybe_run' ) );
+
+		( new Shortcodes( $this->renderer ) )->register();
+		( new Embed( $this->repository, $this->renderer ) )->register();
+
+		if ( is_admin() ) {
+			( new AdminPage( $this->repository ) )->register();
+		}
+
+		/**
+		 * Nach dem Laden aller Komponenten. Erweiterungen können sich hier einhängen.
+		 *
+		 * @param Plugin $plugin Instanz.
+		 */
+		do_action( 'b83_schneebericht_loaded', $this );
+	}
+
+	public function load_textdomain(): void {
+		load_plugin_textdomain( 'b83-schneebericht', false, dirname( plugin_basename( B83_SB_FILE ) ) . '/languages' );
+	}
+
+	public function register_assets(): void {
+		wp_register_style( 'b83-schneebericht', B83_SB_URL . 'assets/css/frontend.css', array(), B83_SB_VERSION );
+	}
+
+	public function repository(): Repository {
+		return $this->repository;
+	}
+
+	public function renderer(): Renderer {
+		return $this->renderer;
+	}
+}

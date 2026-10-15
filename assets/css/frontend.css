@@ -1,0 +1,121 @@
+/* b83 Schneebericht – Frontend. Klassennamen (tvb-sb …) aus Kompatibilitätsgründen beibehalten. */
+
+.tvb-sb {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: .5rem;
+}
+
+.tvb-sb__headline {
+  margin: 0 0 .75rem 0;
+  font-size: 1.35rem;
+}
+
+.tvb-sb__title {
+  margin: 0 0 .75rem 0;
+  font-size: 1.15rem;
+}
+
+.tvb-sb__richtext {
+  margin-bottom: 1rem;
+}
+
+.tvb-sb__kompakt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .75rem 1rem;
+}
+
+@media (max-width: 640px) {
+  .tvb-sb__kompakt-grid { grid-template-columns: 1fr; }
+}
+
+.tvb-kv {
+  padding: .6rem .75rem;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: .4rem;
+}
+
+.tvb-kv__k {
+  font-size: .85rem;
+  opacity: .85;
+  margin-bottom: .2rem;
+}
+
+.tvb-kv__v { font-weight: 600; }
+
+/* Tabellenartige Ausgabe (div-basiert, responsiv) */
+.tvb-sb__table {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.tvb-sb__row {
+  display: grid;
+  grid-template-columns: 2.2fr .7fr 1.4fr 2fr .5fr;
+  gap: .5rem;
+  align-items: center;
+  padding: .6rem .75rem;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: .4rem;
+}
+
+@media (max-width: 860px) {
+  .tvb-sb__row { grid-template-columns: 1.6fr .6fr 1fr 1.4fr .5fr; }
+}
+
+@media (max-width: 640px) {
+  .tvb-sb__row { grid-template-columns: 1fr; }
+  .tvb-sb__cell--link { justify-self: start; }
+}
+
+.tvb-sb__cell--name { font-weight: 700; }
+
+.tvb-pill {
+  display: inline-block;
+  padding: .15rem .5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.12);
+  font-size: .85rem;
+  margin-right: .35rem;
+}
+
+/* Ampelpunkt */
+.tvb-ampel {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.25);
+}
+
+.tvb-ampel--rot { background: #d63638; }
+.tvb-ampel--gelb { background: #dba617; }
+.tvb-ampel--gruen { background: #2ea44f; }
+
+/* Externer Link Icon */
+.tvb-extlink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: .4rem;
+  border: 1px solid rgba(0,0,0,.12);
+  text-decoration: none;
+}
+
+.tvb-extlink__icon { fill: currentColor; }
+
+/* Open/Close Zeilen (für Lifte/Pisten) */
+.tvb-sb__row--openclose {
+  grid-template-columns: 2.2fr .7fr 2.8fr;
+}
+
+@media (max-width: 640px) {
+  .tvb-sb__row--openclose { grid-template-columns: 1fr; }
+}
+
+.tvb-status { font-size: 1.15rem; }

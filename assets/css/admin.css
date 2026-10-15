@@ -1,0 +1,49 @@
+/* b83 Schneebericht – Backend */
+
+.b83-sb-admin__title { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.b83-sb-admin__footer { margin-top: 24px; color: #646970; font-size: 12px; }
+.b83-sb-intro { max-width: 860px; }
+
+/* Autosave-Status */
+.b83-sb-status { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 400; }
+.b83-sb-status.is-idle   { background: #f0f0f1; color: #1d2327; }
+.b83-sb-status.is-dirty  { background: #fff8e5; color: #7a5d00; }
+.b83-sb-status.is-saving { background: #e5f1ff; color: #0b5cab; }
+.b83-sb-status.is-saved  { background: #e7f7ee; color: #116329; }
+.b83-sb-status.is-error  { background: #fde2e2; color: #8a1f11; }
+
+/* Tabellen */
+.b83-sb-table { max-width: 1250px; }
+.b83-sb-table th[scope="row"] { font-weight: 400; }
+.b83-sb-table textarea, .b83-sb-table input[type="text"], .b83-sb-table input[type="url"] { width: 100%; }
+.b83-sb-table textarea { min-height: 56px; }
+.b83-sb-table--anlagen { max-width: 1000px; }
+.b83-sb-badge { display: block; margin-top: 4px; color: #b32d2e; font-size: 12px; }
+.b83-sb-toggle { white-space: nowrap; }
+
+.b83-sb-ampel { border-left-width: 6px !important; }
+.b83-sb-ampel--rot   { border-left-color: #d63638 !important; }
+.b83-sb-ampel--gelb  { border-left-color: #dba617 !important; }
+.b83-sb-ampel--gruen { border-left-color: #2ea44f !important; }
+
+/* Karten */
+.b83-sb-card { max-width: 1000px; margin: 16px 0; padding: 4px 20px 16px; background: #fff; border: 1px solid #c3c4c7; border-radius: 4px; }
+.b83-sb-warning { color: #8a1f11; }
+.b83-sb-codes { max-width: 720px; }
+.b83-sb-roles { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin: 12px 0; }
+
+/* Struktur */
+.b83-sb-group__head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 0; }
+.b83-sb-group__title { font-size: 16px; font-weight: 600; min-width: 260px; }
+.b83-sb-meta { color: #646970; }
+.b83-sb-delete { margin-left: auto; color: #b32d2e; }
+.b83-sb-handle { cursor: move; color: #8c8f94; }
+.b83-sb-col-handle { width: 28px; }
+.b83-sb-items td { vertical-align: middle; }
+.b83-sb-group.is-deleted, .b83-sb-item.is-deleted { opacity: .45; }
+.b83-sb-item.ui-sortable-helper, .b83-sb-group.ui-sortable-helper { background: #f6f7f7; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+
+@media (max-width: 782px) {
+	.b83-sb-delete { margin-left: 0; }
+	.b83-sb-group__title { min-width: 0; width: 100%; }
+}
