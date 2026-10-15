@@ -124,7 +124,7 @@ final class Sanitizer {
 
 	/**
 	 * @param array<mixed> $raw Rohdaten.
-	 * @return array{embed_origins: string[], delete_on_uninstall: bool}
+	 * @return array{embed_origins: string[], delete_on_uninstall: bool, purge_cache: bool}
 	 */
 	public static function settings( array $raw ): array {
 		$origins = $raw['embed_origins'] ?? array();
@@ -142,6 +142,8 @@ final class Sanitizer {
 		return array(
 			'embed_origins'       => array_values( array_unique( array_slice( $clean_origins, 0, 30 ) ) ),
 			'delete_on_uninstall' => ! empty( $raw['delete_on_uninstall'] ),
+			// Standard: an. Nur ein ausdrücklich gesetzter Wert schaltet ab.
+			'purge_cache'         => ! array_key_exists( 'purge_cache', $raw ) || ! empty( $raw['purge_cache'] ),
 		);
 	}
 

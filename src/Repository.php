@@ -88,7 +88,7 @@ final class Repository {
 	 * Einstellungen
 	 * ------------------------------------------------------------------- */
 
-	/** @return array{embed_origins: string[], delete_on_uninstall: bool} */
+	/** @return array{embed_origins: string[], delete_on_uninstall: bool, purge_cache: bool} */
 	public function get_settings(): array {
 		$stored = get_option( self::OPTION_SETTINGS, array() );
 		return Sanitizer::settings( is_array( $stored ) ? $stored : array() );

@@ -33,5 +33,13 @@ Dieses Repository gehört zu den WordPress-Plugins von b83 – Strategisches Onl
 - Benutzeroberfläche Deutsch, alle Texte über `__()` / `esc_html__()` mit Text Domain übersetzbar
 - Kommentare auf Deutsch
 
+## Updates und Releases
+- `Update URI: https://github.com/b83-Strategisches-Online-Marketing/<repo>` im Header
+- Eigene `Updater`-Klasse (Filter `update_plugins_github.com`), Release-Asset heißt `<slug>.zip`
+- Private Repos: Token nur als Konstante `B83_GITHUB_TOKEN` in der wp-config.php, nie im Code
+- `.github/workflows/release.yml` erstellt das Release automatisch, sobald eine neue Version auf `main` liegt
+- Bei Cache-relevanten Daten: Cache der betroffenen Seiten nach dem Speichern leeren
+
 ## Commits
-- Aussagekräftige Commit-Nachrichten auf Deutsch, Version bei Release taggen (`v3.0.0`)
+- Aussagekräftige Commit-Nachrichten auf Deutsch
+- Version im Header, in der Versionskonstante und im CHANGELOG gleichzeitig erhöhen (Semantic Versioning: Fehlerbehebung = x.y.Z, neue Funktion = x.Y.0, inkompatibel = X.0.0)

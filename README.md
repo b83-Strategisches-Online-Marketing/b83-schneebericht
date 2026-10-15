@@ -4,7 +4,7 @@ WordPress-Plugin für einen tagesaktuellen Schneebericht: Backend-Formular mit A
 
 Entwickelt von [b83 – Strategisches Online Marketing](https://b83.at), Wolfgang Grabs-Schrempf, office@b83.at.
 
-- **Version:** 3.0.0
+- **Version:** 3.1.0
 - **Voraussetzungen:** WordPress 6.2+, PHP 8.1+
 - **Lizenz:** GPL-2.0-or-later
 
@@ -46,6 +46,28 @@ Optional: `data-items="id1,id2"`, `data-title="0"`. Die einbettende Domain muss 
 3. Altes Plugin deaktivieren und löschen.
 4. Bestehende Embed-Codes: Im `<script>`-Tag den Pfad von `/plugins/tvb-schneebericht/embed/tvb-sb-embed.js` auf `/plugins/b83-schneebericht/assets/js/embed.js` ändern. Die `<div class="tvb-sb-embed" …>`-Container können bleiben.
 
+## Cache
+
+Nach jedem Speichern leert das Plugin den Seiten-Cache der Seiten, auf denen der Schneebericht vorkommt (WP Rocket, LiteSpeed Cache, W3 Total Cache, WP Super Cache, SiteGround). Seiten werden erkannt, wenn sie den Shortcode ausgeben, und zusätzlich über eine Suche in Inhalten und Elementor-Daten. Abschaltbar unter *Shortcodes & Backup → Einstellungen*.
+
+## Updates
+
+Das Plugin holt Updates aus den GitHub-Releases dieses Repositorys (`Update URI` im Header). Unter *Plugins* lässt sich „Automatische Updates aktivieren“ einschalten.
+
+**Neue Version veröffentlichen:**
+
+1. Version im Plugin-Header **und** in `B83_SB_VERSION` erhöhen (z. B. `3.1.1`)
+2. Abschnitt `## 3.1.1 – Datum` in `CHANGELOG.md` ergänzen
+3. Auf `main` pushen – die GitHub Action prüft die Angaben und erstellt das Release `v3.1.1` mit `b83-schneebericht.zip`
+
+**Privates Repository:** Jede Website braucht einen Lese-Token in der `wp-config.php`:
+
+```php
+define( 'B83_GITHUB_TOKEN', 'github_pat_…' ); // Fine-grained Token, nur „Contents: Read“
+```
+
+Bei einem öffentlichen Repository ist kein Token nötig.
+
 ## Erweitern
 
 | Hook | Typ | Zweck |
@@ -55,6 +77,8 @@ Optional: `data-items="id1,id2"`, `data-title="0"`. Die einbettende Domain muss 
 | `b83_schneebericht_config_saved` | Action | Nach Änderung der Struktur |
 | `b83_schneebericht_section_html` | Filter | HTML eines Bereichs anpassen |
 | `b83_schneebericht_default_config` | Filter | Ausgangsstruktur bei Neuinstallation |
+| `b83_schneebericht_purge_post_ids` | Filter | Seiten, deren Cache nach dem Speichern geleert wird |
+| `b83_schneebericht_purge_cache` | Action | Nach dem Cache-Leeren (für weitere Cache-Lösungen) |
 
 ## Aufbau
 
@@ -67,7 +91,9 @@ src/
   Sanitizer.php            zentrale Validierung aller Eingaben
   GroupTypes.php           Gruppentypen und ihre Felder
   Capabilities.php         Berechtigungen
-  Migration.php            Installation, Updates, Übernahme aus TVB-Plugin
+  Migration.php            Installation, Datenbank-Versionen, Übernahme aus TVB-Plugin
+  Updater.php              Updates über GitHub-Releases
+  Integrations/            Cache-Leerung
   Admin/                   Backend (Status, Struktur, Werkzeuge)
   Frontend/                Renderer, Shortcodes, Embed
 assets/css, assets/js      Styles und Skripte

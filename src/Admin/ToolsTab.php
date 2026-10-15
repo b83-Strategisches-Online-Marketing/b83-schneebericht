@@ -12,6 +12,7 @@ namespace B83\Schneebericht\Admin;
 
 use B83\Schneebericht\Capabilities;
 use B83\Schneebericht\Frontend\Embed;
+use B83\Schneebericht\Integrations\CachePurge;
 use B83\Schneebericht\Migration;
 use B83\Schneebericht\Repository;
 
@@ -21,7 +22,11 @@ final class ToolsTab {
 
 	private const MAX_IMPORT_BYTES = MB_IN_BYTES;
 
-	public function __construct( private Repository $repository ) {}
+	private CachePurge $cache;
+
+	public function __construct( private Repository $repository ) {
+		$this->cache = new CachePurge( $repository );
+	}
 
 	public function register(): void {
 		add_action( 'admin_post_b83_sb_export', array( $this, 'handle_export' ) );
@@ -145,6 +150,28 @@ final class ToolsTab {
 		echo '<p><label for="b83-sb-origins"><strong>' . esc_html__( 'Websites, die einbetten dürfen', 'b83-schneebericht' ) . '</strong></label><br>';
 		echo '<textarea id="b83-sb-origins" name="b83_sb_settings[embed_origins]" rows="4" class="large-text code" placeholder="https://www.example.at&#10;https://*.example.at">' . esc_textarea( implode( "\n", $settings['embed_origins'] ) ) . '</textarea></p>';
 		echo '<p class="description">' . esc_html__( 'Eine Adresse pro Zeile, ohne Pfad. Ein * am Anfang erlaubt alle Subdomains. Diese Website selbst ist immer erlaubt.', 'b83-schneebericht' ) . '</p>';
+
+		$cache_plugin = CachePurge::detected_plugin();
+		echo '<input type="hidden" name="b83_sb_settings[purge_cache]" value="0">';
+		printf(
+			'<p><label><input type="checkbox" name="b83_sb_settings[purge_cache]" value="1"%1$s> %2$s</label></p>',
+			checked( $settings['purge_cache'], true, false ),
+			esc_html__( 'Nach dem Speichern den Cache der Seiten mit Schneebericht leeren', 'b83-schneebericht' )
+		);
+		echo '<p class="description">';
+		if ( '' !== $cache_plugin ) {
+			/* translators: %s: Name des Cache-Plugins */
+			echo esc_html( sprintf( __( 'Erkanntes Cache-Plugin: %s.', 'b83-schneebericht' ), $cache_plugin ) ) . ' ';
+		}
+		$pages = $this->cache->affected_pages();
+		if ( empty( $pages ) ) {
+			echo esc_html__( 'Noch keine Seiten mit Schneebericht gefunden. Seiten werden erkannt, sobald sie einmal aufgerufen wurden.', 'b83-schneebericht' );
+		} else {
+			$titles = array_map( static fn( int $id ): string => get_the_title( $id ), array_slice( $pages, 0, 15 ) );
+			/* translators: %s: Liste von Seitentiteln */
+			echo esc_html( sprintf( __( 'Betroffene Seiten: %s', 'b83-schneebericht' ), implode( ', ', $titles ) . ( count( $pages ) > 15 ? ' …' : '' ) ) );
+		}
+		echo '</p>';
 
 		printf(
 			'<p><label><input type="checkbox" name="b83_sb_settings[delete_on_uninstall]" value="1"%1$s> %2$s</label></p>',

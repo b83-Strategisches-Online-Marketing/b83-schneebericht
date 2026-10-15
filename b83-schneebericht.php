@@ -3,7 +3,7 @@
  * Plugin Name:       b83 Schneebericht
  * Plugin URI:        https://b83.at
  * Description:       Schneebericht mit Backend-Formular, frei verwaltbaren Liften und Loipen, Shortcodes, Autosave, Backup und Einbettung per iFrame.
- * Version:           3.0.0
+ * Version:           3.1.0
  * Requires at least: 6.2
  * Requires PHP:      8.1
  * Author:            b83 – Wolfgang Grabs-Schrempf
@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'B83_SB_VERSION', '3.0.0' );
+define( 'B83_SB_VERSION', '3.1.0' );
 define( 'B83_SB_FILE', __FILE__ );
 define( 'B83_SB_DIR', plugin_dir_path( __FILE__ ) );
 define( 'B83_SB_URL', plugin_dir_url( __FILE__ ) );

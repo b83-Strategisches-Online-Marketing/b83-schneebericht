@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.1.0 – 2026-10-15
+
+### Neu
+- Cache wird nach dem Speichern automatisch geleert – nur für die Seiten, auf denen der Schneebericht steht (WP Rocket, LiteSpeed Cache, W3 Total Cache, WP Super Cache, SiteGround). Abschaltbar in den Einstellungen.
+- Updates über GitHub: Neue Versionen erscheinen unter *Plugins*, automatische Updates lassen sich aktivieren.
+- „Details ansehen“ zeigt die Änderungen der neuen Version.
+- Releases mit installierbarer ZIP-Datei entstehen automatisch, sobald eine neue Version auf GitHub landet.
+
 ## 3.0.0 – 2026-10-15
 
 Neuaufbau als b83-Plugin (Nachfolger von „TVB Schneebericht“ 2.3.1).

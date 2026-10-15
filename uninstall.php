@@ -20,9 +20,12 @@ if ( is_array( $b83_sb_settings ) && ! empty( $b83_sb_settings['delete_on_uninst
 		'b83_schneebericht_db_version',
 		'b83_schneebericht_migrated_from_tvb',
 		'b83_schneebericht_migration_seen',
+		'b83_schneebericht_pages',
 	) as $b83_sb_option ) {
 		delete_option( $b83_sb_option );
 	}
+	delete_transient( 'b83_schneebericht_pages_scan' );
+	delete_transient( 'b83_schneebericht_release' );
 
 	foreach ( array_keys( wp_roles()->roles ) as $b83_sb_role_key ) {
 		$b83_sb_role = get_role( $b83_sb_role_key );

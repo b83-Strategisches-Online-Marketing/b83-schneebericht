@@ -13,6 +13,7 @@ use B83\Schneebericht\Admin\AdminPage;
 use B83\Schneebericht\Frontend\Embed;
 use B83\Schneebericht\Frontend\Renderer;
 use B83\Schneebericht\Frontend\Shortcodes;
+use B83\Schneebericht\Integrations\CachePurge;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -46,7 +47,11 @@ final class Plugin {
 		add_action( 'init', array( $this, 'register_assets' ) );
 		add_action( 'admin_init', array( Migration::class, 'maybe_run' ) );
 
-		( new Shortcodes( $this->renderer ) )->register();
+		$cache = new CachePurge( $this->repository );
+		$cache->register();
+
+		( new Updater() )->register();
+		( new Shortcodes( $this->renderer, $cache ) )->register();
 		( new Embed( $this->repository, $this->renderer ) )->register();
 
 		if ( is_admin() ) {

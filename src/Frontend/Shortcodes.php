@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace B83\Schneebericht\Frontend;
 
+use B83\Schneebericht\Integrations\CachePurge;
+
 defined( 'ABSPATH' ) || exit;
 
 final class Shortcodes {
@@ -26,7 +28,7 @@ final class Shortcodes {
 		'tvb_schnee_skilifte_postalm'     => 'skilifte_postalm',
 	);
 
-	public function __construct( private Renderer $renderer ) {}
+	public function __construct( private Renderer $renderer, private ?CachePurge $cache = null ) {}
 
 	public function register(): void {
 		// Priorität 20: überschreibt die Shortcodes des alten Plugins, falls es noch aktiv ist.
@@ -79,6 +81,7 @@ final class Shortcodes {
 	 */
 	private function output( string $section, array $opts ): string {
 		wp_enqueue_style( 'b83-schneebericht' );
+		$this->cache?->remember_current_page();
 		return $this->renderer->render_section( $section, $opts );
 	}
 
