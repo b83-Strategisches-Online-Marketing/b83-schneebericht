@@ -26,6 +26,7 @@ final class AdminPage {
 
 	private StructureTab $structure;
 	private ToolsTab $tools;
+	private string $hook = '';
 
 	public function __construct( private Repository $repository ) {
 		$this->structure = new StructureTab( $repository );
@@ -39,21 +40,35 @@ final class AdminPage {
 		add_action( 'admin_post_b83_sb_save_status', array( $this, 'handle_save' ) );
 		add_action( 'wp_ajax_b83_sb_autosave', array( $this, 'handle_autosave' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( B83_SB_FILE ), array( $this, 'action_links' ) );
+		add_filter( 'b83_admin_plugin_links', array( $this, 'overview_link' ) );
+
+		( new B83Menu( B83_SB_URL, B83_SB_DIR ) )->register();
 
 		$this->structure->register();
 		$this->tools->register();
 	}
 
+	/** Unterpunkt im gemeinsamen b83-Menü. */
 	public function add_menu(): void {
-		add_menu_page(
+		$this->hook = (string) add_submenu_page(
+			B83Menu::SLUG,
 			__( 'Schneebericht', 'b83-schneebericht' ),
 			__( 'Schneebericht', 'b83-schneebericht' ),
 			Capabilities::EDIT,
 			self::SLUG,
-			array( $this, 'render' ),
-			'dashicons-cloud-snow',
-			80
+			array( $this, 'render' )
 		);
+	}
+
+	/**
+	 * Link für die Übersichtsseite des b83-Menüs.
+	 *
+	 * @param array<string,string> $links Links.
+	 * @return array<string,string>
+	 */
+	public function overview_link( array $links ): array {
+		$links[ plugin_basename( B83_SB_FILE ) ] = self::url();
+		return $links;
 	}
 
 	/**
@@ -82,7 +97,7 @@ final class AdminPage {
 	 * ------------------------------------------------------------------- */
 
 	public function enqueue( string $hook ): void {
-		if ( 'toplevel_page_' . self::SLUG !== $hook ) {
+		if ( '' === $this->hook || $this->hook !== $hook ) {
 			return;
 		}
 		$tab = $this->current_tab();

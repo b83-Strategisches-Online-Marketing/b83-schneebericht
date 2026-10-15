@@ -4,7 +4,7 @@ WordPress-Plugin für einen tagesaktuellen Schneebericht: Backend-Formular mit A
 
 Entwickelt von [b83 – Strategisches Online Marketing](https://b83.at), Wolfgang Grabs-Schrempf, office@b83.at.
 
-- **Version:** 3.1.0
+- **Version:** 3.2.0
 - **Voraussetzungen:** WordPress 6.2+, PHP 8.1+
 - **Lizenz:** GPL-2.0-or-later
 
@@ -19,6 +19,10 @@ Entwickelt von [b83 – Strategisches Online Marketing](https://b83.at), Wolfgan
 - **Berechtigungen:** Bearbeiten je Rolle freischaltbar; Struktur, Rollen, Import und Einstellungen nur für Administratoren
 - **Backup:** Export/Import als JSON (auch Backups des alten „TVB Schneebericht“)
 - **Einbettung** per iFrame auf freigegebenen Domains, Höhe passt sich automatisch an
+
+## Backend
+
+Alle b83-Plugins liegen im gemeinsamen Menü **b83** (mit Logo). Der Schneebericht ist unter *b83 → Schneebericht* erreichbar, die Übersicht *b83 → Übersicht* zeigt alle installierten b83-Plugins.
 
 ## Shortcodes
 
@@ -78,6 +82,7 @@ Bei einem öffentlichen Repository ist kein Token nötig.
 | `b83_schneebericht_section_html` | Filter | HTML eines Bereichs anpassen |
 | `b83_schneebericht_default_config` | Filter | Ausgangsstruktur bei Neuinstallation |
 | `b83_schneebericht_purge_post_ids` | Filter | Seiten, deren Cache nach dem Speichern geleert wird |
+| `b83_admin_plugin_links` | Filter | Link je b83-Plugin auf der b83-Übersichtsseite |
 | `b83_schneebericht_purge_cache` | Action | Nach dem Cache-Leeren (für weitere Cache-Lösungen) |
 
 ## Aufbau
@@ -94,7 +99,7 @@ src/
   Migration.php            Installation, Datenbank-Versionen, Übernahme aus TVB-Plugin
   Updater.php              Updates über GitHub-Releases
   Integrations/            Cache-Leerung
-  Admin/                   Backend (Status, Struktur, Werkzeuge)
+  Admin/                   Backend (Status, Struktur, Werkzeuge, gemeinsames b83-Menü)
   Frontend/                Renderer, Shortcodes, Embed
 assets/css, assets/js      Styles und Skripte
 ```

@@ -15,6 +15,11 @@ Dieses Repository gehört zu den WordPress-Plugins von b83 – Strategisches Onl
 - `SECURITY.md` (Meldeweg für Lücken) und `.github/dependabot.yml` (Actions aktuell halten) in jedem Repository
 - `README.md` und `CHANGELOG.md` pflegen, Version in Header, Konstante und Changelog gleich halten
 
+## Backend-Menü
+- Alle Einstellungen liegen im gemeinsamen Hauptmenü „b83“: Klasse `src/Admin/B83Menu.php` unverändert aus dem Schneebericht übernehmen (nur Namespace und Text Domain anpassen), dazu `assets/img/b83-logo.svg`, `assets/img/b83-menu-icon.svg`, `assets/css/b83-menu.css`
+- Eigene Seite mit `add_submenu_page( B83Menu::SLUG, … )` einhängen, Link über Filter `b83_admin_plugin_links` melden
+- Bei Änderungen an B83Menu `MENU_VERSION` erhöhen – die neueste Version auf einer Website baut das Menü
+
 ## Sicherheit (Pflicht)
 - `defined( 'ABSPATH' ) || exit;` in jeder PHP-Datei
 - Jede schreibende Aktion: Capability prüfen **und** Nonce prüfen (`check_admin_referer` / `check_ajax_referer`)

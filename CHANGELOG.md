@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.2.0 – 2026-10-15
+
+### Neu
+- Gemeinsames Hauptmenü „b83“ mit Logo für alle b83-Plugins; das Symbol passt sich dem Admin-Farbschema an
+- Übersichtsseite „b83 Plugins“ mit allen installierten b83-Plugins, Version, Status und Direktlink
+
+### Geändert
+- Der Schneebericht liegt jetzt unter *b83 → Schneebericht* (Adresse der Seite unverändert). Redakteure ohne Administratorrechte sehen „b83“ und gelangen direkt zum Schneebericht.
+
 ## 3.1.0 – 2026-10-15
 
 ### Neu
