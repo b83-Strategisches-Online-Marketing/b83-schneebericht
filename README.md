@@ -1,10 +1,12 @@
+![](assets/img/banner-772x250.png)
+
 # b83 Schneebericht
 
 WordPress-Plugin für einen tagesaktuellen Schneebericht: Backend-Formular mit Autosave, frei verwaltbare Lifte und Loipen, Shortcodes, Backup und Einbettung auf anderen Websites.
 
 Entwickelt von [b83 – Strategisches Online Marketing](https://b83.at), Wolfgang Grabs-Schrempf, office@b83.at.
 
-- **Version:** 3.2.0
+- **Version:** 3.3.0
 - **Voraussetzungen:** WordPress 6.2+, PHP 8.1+
 - **Lizenz:** GPL-2.0-or-later
 

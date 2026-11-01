@@ -67,6 +67,8 @@ final class Updater {
 			'package'      => $release['package'],
 			'requires_php' => '8.1',
 			'requires'     => '6.2',
+			'icons'        => $this->icons(),
+			'banners'      => $this->banners(),
 		);
 	}
 
@@ -97,8 +99,11 @@ final class Updater {
 			'requires_php'  => '8.1',
 			'last_updated'  => $release['published'],
 			'download_link' => $release['package'],
+			'icons'         => $this->icons(),
+			'banners'       => $this->banners(),
 			'sections'      => array(
-				'changelog' => $release['notes'],
+				'description' => $this->description(),
+				'changelog'   => $release['notes'],
 			),
 		);
 	}
@@ -148,6 +153,48 @@ final class Updater {
 		);
 		set_transient( self::TRANSIENT, $release, 6 * HOUR_IN_SECONDS );
 		return $release;
+	}
+
+	/**
+	 * Icons für die Update-Liste und „Details ansehen“.
+	 *
+	 * @return array<string,string>
+	 */
+	private function icons(): array {
+		$url = plugin_dir_url( B83_SB_FILE ) . 'assets/img/';
+		return array(
+			'1x'  => $url . 'icon-128x128.png',
+			'2x'  => $url . 'icon-256x256.png',
+			'svg' => $url . 'icon.svg',
+		);
+	}
+
+	/**
+	 * Banner für „Details ansehen“.
+	 *
+	 * @return array<string,string>
+	 */
+	private function banners(): array {
+		$url = plugin_dir_url( B83_SB_FILE ) . 'assets/img/';
+		return array(
+			'low'  => $url . 'banner-772x250.png',
+			'high' => $url . 'banner-1544x500.png',
+		);
+	}
+
+	/** Beschreibung für „Details ansehen“. */
+	private function description(): string {
+		$html = '';
+		$html .= '<p>' . esc_html__( 'Der Schneebericht für Skigebiete, Loipenbetreiber und Tourismusverbände. Schneehöhen, Neuschnee, Temperatur, Lawinenwarnstufe und den Zustand jeder Loipe und jedes Lifts trägt das Team in ein Formular im Backend ein, das laufend selbst speichert.', 'b83-schneebericht' ) . '</p>';
+		$html .= '<ul>';
+		$html .= '<li>' . esc_html__( 'Lifte und Loipen frei anlegen, sortieren und ausblenden', 'b83-schneebericht' ) . '</li>';
+		$html .= '<li>' . esc_html__( 'Loipen mit Ampel, Schwierigkeit, Stil und Notiz, Lifte mit geöffnet oder geschlossen', 'b83-schneebericht' ) . '</li>';
+		$html .= '<li>' . esc_html__( 'Bearbeiten je Benutzerrolle freischaltbar', 'b83-schneebericht' ) . '</li>';
+		$html .= '<li>' . esc_html__( 'Ausgabe per Shortcode oder als iFrame auf anderen Websites, die Höhe passt sich an', 'b83-schneebericht' ) . '</li>';
+		$html .= '<li>' . esc_html__( 'Backup als JSON, auch aus dem alten TVB Schneebericht', 'b83-schneebericht' ) . '</li>';
+		$html .= '</ul>';
+		$html .= '<p>' . esc_html__( 'Ein Plugin von b83 – Strategisches Online Marketing.', 'b83-schneebericht' ) . ' <a href="https://b83.at">b83.at</a></p>';
+		return $html;
 	}
 
 	/* ---------------------------------------------------------------------
