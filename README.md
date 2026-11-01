@@ -6,7 +6,7 @@ WordPress-Plugin für einen tagesaktuellen Schneebericht: Backend-Formular mit A
 
 Entwickelt von [b83 – Strategisches Online Marketing](https://b83.at), Wolfgang Grabs-Schrempf, office@b83.at.
 
-- **Version:** 3.4.0
+- **Version:** 3.4.1
 - **Voraussetzungen:** WordPress 6.2+, PHP 8.1+
 - **Lizenz:** GPL-2.0-or-later
 
