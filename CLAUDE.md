@@ -10,7 +10,7 @@
 - **Präfix für Funktionen, Optionen, Hooks:** `b83_schneebericht_` (Namespace: `B83\Schneebericht`)
 - **Repository:** github.com/b83-Strategisches-Online-Marketing/b83-schneebericht (öffentlich)
 - **Vertrieb:** Verkaufskandidat (Vertriebsweg noch offen)
-- **Im Einsatz auf:** abtenau-info.at; Einbettung per Embed-Skript u. a. auf karkogel.abtenau-info.at
+- **Im Einsatz auf:** mehrere Kundenseiten
 - **Zweck in einem Satz:** Schneebericht mit Backend-Formular, frei verwaltbaren Liften und Loipen, Shortcodes, Autosave, Backup und Einbettung per iFrame.
 
 ## b83-Standards (gelten für alle b83-Plugins)
