@@ -9,8 +9,8 @@
 - **Slug / Text-Domain:** `b83-schneebericht`
 - **Präfix für Funktionen, Optionen, Hooks:** `b83_schneebericht_` (Namespace: `B83\Schneebericht`)
 - **Repository:** github.com/b83-Strategisches-Online-Marketing/b83-schneebericht (öffentlich)
-- **Vertrieb:** {{intern | gratis auf wordpress.org | Freemium über Freemius}}
-- **Im Einsatz auf:** {{z. B. abtenau-info.at, sporer.at}}
+- **Vertrieb:** Verkaufskandidat (Vertriebsweg noch offen)
+- **Im Einsatz auf:** noch offen
 - **Zweck in einem Satz:** Schneebericht mit Backend-Formular, frei verwaltbaren Liften und Loipen, Shortcodes, Autosave, Backup und Einbettung per iFrame.
 
 ## b83-Standards (gelten für alle b83-Plugins)
@@ -76,6 +76,12 @@ Kontakt in Doku und Support-Texten: office@b83.at
 > Hier festhalten, was entschieden wurde, damit niemand es neu diskutiert.
 
 > Wo eine Entscheidung unten von den b83-Standards oben abweicht, gilt für dieses Plugin die Entscheidung.
+
+### Präfix und Optionen
+
+- Das Präfix `b83_sb_` (Aktionen, Nonces, AJAX-Hooks) und die drei getrennten Optionen `b83_schneebericht_config`, `b83_schneebericht_data` und `b83_schneebericht_settings` bleiben unverändert. Sie weichen vom Standard (`b83_schneebericht_`, eine Sammeloption) ab.
+- **Warum:** Bestehende Installationen speichern ihre Daten unter diesen Namen. Eine Umbenennung bräuchte eine Migration und brächte Risiko für Datenverlust, ohne Nutzen für Anwender.
+- Kein Umbau, auch nicht bei einem späteren Verkauf, solange nichts anderes entschieden wird.
 
 ### Bisherige Projektregeln (aus dem früheren CLAUDE.md übernommen)
 
