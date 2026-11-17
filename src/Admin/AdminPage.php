@@ -465,13 +465,22 @@ final class AdminPage {
 
 	public function handle_autosave(): void {
 		if ( ! Capabilities::can_edit() ) {
+			if ( ob_get_length() ) {
+				ob_clean();
+			}
 			wp_send_json_error( array( 'message' => 'forbidden' ), 403 );
 		}
 		if ( ! check_ajax_referer( self::NONCE_AUTOSAVE, 'nonce', false ) ) {
+			if ( ob_get_length() ) {
+				ob_clean();
+			}
 			wp_send_json_error( array( 'message' => 'bad_nonce' ), 403 );
 		}
 
 		$tab = $this->apply_post();
+		if ( ob_get_length() ) {
+			ob_clean();
+		}
 		wp_send_json_success(
 			array(
 				'time' => wp_date( 'H:i:s' ),
