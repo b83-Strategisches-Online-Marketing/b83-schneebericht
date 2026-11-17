@@ -13,3 +13,18 @@ Thumbs.db
 
 # Laufzeitdaten des alten Plugins nie einchecken
 tvb_schneebericht_data.json
+
+# Ergänzt aus der b83-Vorlage
+# Persönliche Claude-Code-Dateien
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Abhängigkeiten und Builds
+/build/
+
+# Secrets
+.env
+.env.*
+
+# System
+desktop.ini
